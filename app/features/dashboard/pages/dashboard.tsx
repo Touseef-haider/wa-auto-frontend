@@ -1,5 +1,7 @@
+import Button from "@/app/common/Button/Index";
 import { getAnaylytics } from "../server-actions";
 import { DashboardAnalytic } from "../types";
+import ChatStarter from "../components/start-chat";
 
 export default async function Dashboard() {
 
@@ -9,7 +11,9 @@ export default async function Dashboard() {
       filename:"",
       updated_at: ""
     },
+    
     total_files:0,
+    total_products:0,
     total_messages:0
   }
   if(response?.data){
@@ -36,22 +40,16 @@ export default async function Dashboard() {
           <h2 className="text-sm font-medium text-gray-500">Last Upload</h2>
           <p className="text-gray-600 mt-1">{data.last_upload.filename || "-"}</p>
         </div>
+        <div className="bg-white shadow rounded-lg p-4">
+          <h2 className="text-sm font-medium text-gray-500">Total Products</h2>
+          <p className="text-xl font-semibold mt-1">{data.total_products}</p>
+        </div>
+        <ChatStarter />
       </div>
 
       {/* Detailed Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Uploaded Files */}
-        {/* <div className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-base font-semibold mb-4">Uploaded Files</h2>
-          <ul className="divide-y divide-gray-200 text-sm">
-            {uploadedFiles.map((file) => (
-              <li key={file.id} className="py-2 flex justify-between">
-                <span>{file.name}</span>
-                <span className="text-gray-500">{file.size}</span>
-              </li>
-            ))}
-          </ul>
-        </div> */}
 
         {/* Chat Messages */}
         {/* <div className="bg-white shadow rounded-lg p-4">

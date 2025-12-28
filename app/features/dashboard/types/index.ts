@@ -1,6 +1,7 @@
 
 export type DashboardAnalytic = {
     total_files:number,
+    total_products?: number,
     total_messages: number
     last_upload:{
         filename: string
