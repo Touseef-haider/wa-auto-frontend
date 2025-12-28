@@ -78,6 +78,22 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       [href]: !prev[href],
     }));
   };
+
+  useEffect(()=>{
+    sidebarItems.forEach(item => {
+      item.subItems?.forEach(subItem => {
+        if(pathname.startsWith(subItem.href)){
+          setOpenSubItems(prev => ({
+            ...prev,
+            [item.href]: true,
+          }))
+        }
+      })
+    })
+    return () => {
+      setOpenSubItems({})
+    }
+  },[pathname])
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">
 
@@ -150,6 +166,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
               ? pathname === '/'
               : pathname.startsWith(item.href);
 
+            
             return (
               <div key={item.href}>
                 <div className={`
@@ -166,7 +183,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
                     {!collapsed && item.label}
                   </Link>
                   {
-                    Array.isArray(item.subItems) && item.subItems.length > 0 &&!collapsed  && !openSubItems[item.href] && (
+                    Array.isArray(item.subItems) && item.subItems.length > 0 &&!collapsed && !openSubItems[item.href]  && (
                       <Button
                         isHover={false}
                         type="button"
