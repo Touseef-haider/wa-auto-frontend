@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+@theme{
+  --color-primary: #1E3A8A;
+  --color-secondary: #F9FAFB;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes bounceDot {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dot {
+  @apply w-2 h-2 bg-primary rounded-full inline-block;
+  animation: bounceDot 1.4s infinite ease-in-out;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
 }
